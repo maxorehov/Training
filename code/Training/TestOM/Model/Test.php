@@ -9,7 +9,8 @@ class Test
         private ManagerInterface $manager,
         private $name,
         private int $number,
-        private array $arrayList
+        private array $arrayList,
+        private ManagerInterfaceFactory $managerFactory
     ) {}
 
 
@@ -23,5 +24,8 @@ class Test
         print_r($this->number);
         echo '<br>';
         print_r($this->arrayList);
+        echo '<br>';
+        $newManager = $this->managerFactory->create();
+        print_r(get_class($newManager));
     }
 }

@@ -16,7 +16,6 @@ class Index implements ActionInterface
     public function execute()
     {
        $this->test->log();
-       echo 'HELLO';
        exit;
     }
 }
