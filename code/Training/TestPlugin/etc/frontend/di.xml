@@ -10,4 +10,7 @@
 <!--    <type name="Magento\Catalog\Controller\Product\View">-->
 <!--        <plugin name="training_test3" type="Training\TestPlugin\Plugin\Controller\Product\View" />-->
 <!--    </type>-->
+    <type name="Magento\Framework\View\Layout">
+        <plugin name="training_test_xml" type="Training\TestPlugin\Plugin\View\Layout" />
+    </type>
 </config>
