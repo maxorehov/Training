@@ -4,4 +4,11 @@
         <referenceContainer name="top.container">
             <block name="topinfo" template="Training_Render::topinfo.phtml"/>
         </referenceContainer>
+    <referenceContainer name="content">
+        <block name="testargument" template="Training_Render::test.phtml">
+        <arguments>
+            <argument name="background_color" xsi:type="string">lightskyblue</argument>
+        </arguments>
+    </block>
+</referenceContainer>
 </page>
