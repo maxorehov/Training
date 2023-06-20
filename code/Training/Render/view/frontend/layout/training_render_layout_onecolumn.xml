@@ -4,4 +4,12 @@
     <head>
         <title>Onecolumn Page</title>
     </head>
+    <referenceContainer name="content">
+        <block name="test_form"
+               template="Training_Render::form.phtml">
+            <arguments>
+                <argument name="view_model" xsi:type="object">Training\Render\ViewModel\Form</argument>
+            </arguments>
+        </block>
+    </referenceContainer>
 </page>
