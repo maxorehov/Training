@@ -1,0 +1,20 @@
+<div data-bind="scope: 'customQty'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "customQty": {
+                    "component": "Training_Js/js/custom-qty",
+                        "config": {
+                            "template": "Training_Js/custom-qty",
+                            "url": <?= json_encode($this->getUrl('training_js/qty/index')) ?>
+                    }
+                }
+            }
+        }
+    }
+}
+</script>

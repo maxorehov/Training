@@ -1,0 +1,12 @@
+<div class="custom-qty-container">
+    <!-- ko if: (isDisplaying) -->
+    <div class="custom-qty">
+            <p data-bind="text: productQty()"/>
+    </div>
+    <!--/ko-->
+    <div class="action">
+        <button type="button" data-bind="i18n: 'Show Available QTY', click: getQty"></button>
+    </div>
+</div>
+
+
