@@ -1,0 +1,37 @@
+<?php
+/**
+ * @var \Training\Feedback\Block\FeedbackList $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+
+<div>
+    <div class="toolbar">
+        <div class="action">
+            <button id="add" title="<?= __('Add Feedback') ?>"
+                    type="button" class="action scalable primary"
+                    onclick="location.href = '<?= $escaper->escapeUrl($block->getAddFeedbackUrl()) ?>';">
+                <span><?= __('Add Feedbaack') ?></span>
+            </button>
+        </div>
+        <div class="feedback-statistic">
+            <p><?= __('Total number of submitted feedbacks: %1', $block->getAllFeedbackNumber()) ?></p>
+            <p><?= __('Total number of active feedbacks: %1', $block->getActiveFeedbackNumber()) ?></p>
+        </div>
+        <?= $block->getPagerHtml() ?>
+    </div>
+    <div class="feedback-list">
+        <?php foreach ($block->getCollection() as $feedback): ?>
+            <div class="feedback-item" style="background-color: #55ecf4; margin: 5px;">
+                <p>
+                    <?= $escaper->escapeHtml($feedback->getAuthorName()) ?>
+                    <?= $escaper->escapeHtml($feedback->getUpdateTime()) ?>
+                </p>
+                <p><?= $escaper->escapeHtml($feedback->getMessage()) ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="toolbar">
+        <?= $block->getPagerHtml() ?>
+    </div>
+</div>
