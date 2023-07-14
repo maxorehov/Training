@@ -10,6 +10,9 @@ use Training\Feedback\Model\ResourceModel\Feedback\Collection;
 use Training\Feedback\Model\ResourceModel\Feedback;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 
+
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\Api\SortOrderBuilder;
 use Training\Feedback\Api\FeedbackRepositoryInterface;
 
 
@@ -43,25 +46,40 @@ class FeedbackList extends Template
     private $repository;
 
     /**
+     * @var SearchCriteriaBuilder
+     */
+    private $searchCriteriaBuilder;
+
+    /**
+     * @var SortOrderBuilder
+     */
+    private $sortOrderbulder;
+
+    /**
      * @param Context $context
      * @param CollectionFactory $collectionFactory
      * @param Timezone $timezone
      * @param array $data
      */
     public function __construct(
-        Context $context,
-        CollectionFactory $collectionFactory,
-        Timezone $timezone,
-        Feedback $feedbackResource,
+        Context                     $context,
+        CollectionFactory           $collectionFactory,
+        Timezone                    $timezone,
+        Feedback                    $feedbackResource,
         FeedbackRepositoryInterface $repository,
-        array $data = array()
-    ) {
+        SearchCriteriaBuilder       $searchCriteriaBuilder,
+        SortOrderBuilder            $sortOrderBuilder,
+        array                       $data = array()
+    )
+    {
         parent::__construct($context, $data);
         $this->collectionFactory = $collectionFactory;
         $this->timezone = $timezone;
         $this->feedbackResource = $feedbackResource;
 
         $this->repository = $repository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->sortOrderbulder = $sortOrderBuilder;
     }
 
     /**
@@ -138,6 +156,24 @@ class FeedbackList extends Template
         $feedback = $this->repository->getById($id);
         $feedback->getExtensionAttributes();
 
+    }
+
+    public function getCollectionFromRepo()
+    {
+        $currentPage = $this->getRequest()->getParam('p');
+        $this->searchCriteriaBuilder->addFilter('is_active', 1);
+        $this->searchCriteriaBuilder->setPageSize($this->getLimit());
+        if (!empty($currentPage)) {
+            $this->searchCriteriaBuilder->setCurrentPage($currentPage);
+        }
+        $sortOrder = $this->sortOrderbulder
+            ->setField('creation_time')
+            ->setDescendingDirection()
+            ->create();
+        $this->searchCriteriaBuilder->addSortOrder($sortOrder);
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $serchResult = $this->repository->getList($searchCriteria);
+        return $serchResult->getItems();
     }
 }
 

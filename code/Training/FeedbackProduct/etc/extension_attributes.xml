@@ -2,6 +2,13 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Training\Feedback\Api\Data\FeedbackInterface">
-        <attribute code="products" type="Magento\Catalog\Api\Data\ProductInterface[]"/>
+        <attribute code="products" type="Magento\Catalog\Api\Data\ProductInterface[]">
+            <join reference_table="training_feedback_product"
+                  reference_field="feedback_id"
+                  join_on_field="feedback_id"
+            >
+                <field>product_id</field>
+            </join>
+        </attribute>
     </extension_attributes>
 </config>

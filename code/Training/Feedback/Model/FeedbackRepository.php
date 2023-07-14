@@ -12,6 +12,7 @@ use Training\Feedback\Model\ResourceModel\Feedback as FeedbackResource;
 use Training\Feedback\Api\Data\FeedbackInterfaceFactory as FeedbackFactory;
 use Training\Feedback\Model\ResourceModel\Feedback\CollectionFactory as FeedbackCollectionFactory;
 use Training\Feedback\Api\Data\FeedbackSearchResultsInterfaceFactory as FeedbackSearchResultFactory;
+use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 class FeedbackRepository implements FeedbackRepositoryInterface
 {
     /**
@@ -40,6 +41,11 @@ class FeedbackRepository implements FeedbackRepositoryInterface
     private $collectionProcessor;
 
     /**
+     * @var JoinProcessorInterface
+     */
+    private $joinProcessor;
+
+    /**
      * @param FeedbackResource $resource
      * @param FeedbackFactory $feedbackFactory
      * @param FeedbackCollectionFactory $feedbackCollectionFactory
@@ -51,13 +57,15 @@ class FeedbackRepository implements FeedbackRepositoryInterface
         FeedbackFactory $feedbackFactory,
         FeedbackCollectionFactory $feedbackCollectionFactory,
         FeedbackSearchResultFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor
+        CollectionProcessorInterface $collectionProcessor,
+        JoinProcessorInterface $joinProcessor
     ) {
         $this->resource = $resource;
         $this->feedbackFactory = $feedbackFactory;
         $this->feedbackCollectionFactory = $feedbackCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->collectionProcessor = $collectionProcessor;
+        $this->joinProcessor = $joinProcessor;
     }
 
     /**
@@ -111,6 +119,7 @@ class FeedbackRepository implements FeedbackRepositoryInterface
         /** @var \Training\Feedback\Model\ResourceModel\Feedback\Collection $collection */
         $collection = $this->feedbackCollectionFactory->create();
         $this->collectionProcessor->process($criteria, $collection);
+        $this->joinProcessor->process($collection);
         /** @var \Training\Feedback\Api\Data\FeedbackSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
