@@ -10,6 +10,8 @@ use Training\Feedback\Model\ResourceModel\Feedback\Collection;
 use Training\Feedback\Model\ResourceModel\Feedback;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 
+use Training\Feedback\Api\FeedbackRepositoryInterface;
+
 
 class FeedbackList extends Template
 {
@@ -30,7 +32,15 @@ class FeedbackList extends Template
      */
     private $timezone;
 
+    /**
+     * @var Feedback
+     */
     private $feedbackResource;
+
+    /**
+     * @var FeedbackRepositoryInterface
+     */
+    private $repository;
 
     /**
      * @param Context $context
@@ -43,12 +53,15 @@ class FeedbackList extends Template
         CollectionFactory $collectionFactory,
         Timezone $timezone,
         Feedback $feedbackResource,
+        FeedbackRepositoryInterface $repository,
         array $data = array()
     ) {
         parent::__construct($context, $data);
         $this->collectionFactory = $collectionFactory;
         $this->timezone = $timezone;
         $this->feedbackResource = $feedbackResource;
+
+        $this->repository = $repository;
     }
 
     /**
@@ -120,5 +133,11 @@ class FeedbackList extends Template
         return $this->feedbackResource->getActiveFeedbackNumber();
     }
 
+    public function test($id)
+    {
+        $feedback = $this->repository->getById($id);
+        $feedback->getExtensionAttributes();
+
+    }
 }
 

@@ -22,10 +22,12 @@
     </div>
     <div class="feedback-list">
         <?php foreach ($block->getCollection() as $feedback): ?>
+        <?php /** @var \Training\Feedback\Api\Data\FeedbackInterface $feedback*/?>
             <div class="feedback-item" style="background-color: #55ecf4; margin: 5px;">
                 <p>
                     <?= $escaper->escapeHtml($feedback->getAuthorName()) ?>
                     <?= $escaper->escapeHtml($feedback->getUpdateTime()) ?>
+                    <?= $block->test($feedback->getId()); ?>
                 </p>
                 <p><?= $escaper->escapeHtml($feedback->getMessage()) ?></p>
             </div>

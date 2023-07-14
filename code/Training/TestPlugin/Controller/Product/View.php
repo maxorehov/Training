@@ -46,13 +46,13 @@ class View extends ParentViewController
         \Magento\Catalog\Helper\Product\View $viewHelper,
         ForwardFactory $resultForwardFactory,
         PageFactory $resultPageFactory,
+        Session $customerSessin,
+        RedirectFactory $redirectFactory,
         ?LoggerInterface $logger = null,
         ?Data $jsonHelper = null,
         ?Design $catalogDesign = null,
         ?ProductRepositoryInterface $productRepository = null,
-        ?StoreManagerInterface $storeManager = null,
-        Session $customerSessin,
-        RedirectFactory $redirectFactory
+        ?StoreManagerInterface $storeManager = null
     )
     {
         $this->redirectFactory = $redirectFactory;
