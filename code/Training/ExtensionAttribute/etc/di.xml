@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Training\ExtensionAttribute\Api\Data\CustomerDescriptionInterface" type="Training\ExtensionAttribute\Model\CustomerDescription" />
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="add_extension_attribute_customer_description" type="Training\ExtensionAttribute\Plugin\Model\LoadCustomerDescription" />
+    </type>
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="save_customer_description" type="Training\ExtensionAttribute\Plugin\Model\SaveCustomerDescription" />
+    </type>
+</config>

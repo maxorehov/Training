@@ -1,0 +1,14 @@
+{
+    "customer_description": {
+        "column": {
+            "id": true,
+            "customer_email": true,
+            "can_show": true,
+            "customer_description": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "CUSTOMER_DESCRIPTION_CUSTOMER_EMAIL_CUSTOMER_ENTITY_EMAIL": true
+        }
+    }
+}

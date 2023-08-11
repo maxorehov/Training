@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
+    <extension_attributes for="Magento\Customer\Api\Data\CustomerInterface">
+        <attribute code="description" type="string">
+            <join reference_table="customer_description" reference_field="customer_email" join_on_field="email">
+                <field>customer_description</field>
+            </join>
+        </attribute>
+        <attribute code="can_show" type="boolean">
+            <join reference_table="customer_description" reference_field="customer_email" join_on_field="email">
+                <field>can_show</field>
+            </join>
+        </attribute>
+    </extension_attributes>
+</config>
